@@ -1,0 +1,17 @@
+# All the user units will be placed in ~/.config/systemd/user/
+# systemctl --user enable unit
+# loginctl enable-linger username - to allow unit to run outside of user session
+# journalctl --user
+[Unit]
+Description=Solaregde power distribution controller
+
+[Service]
+WorkingDirectory=/home/oleg/tesla
+ExecStart=/usr/bin/python main.py
+Restart=always
+RestartSec=30
+WatchdogSec=600
+NotifyAccess=main
+
+[Install]
+WantedBy=default.target
